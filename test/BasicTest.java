@@ -6,8 +6,12 @@ import models.*;
 public class BasicTest extends UnitTest {
 
     @Test
-    public void aVeryImportantThingToTest() {
-        assertEquals(2, 1 + 1);
+    public void createAndRetrivuUser() {
+        new User("bob@gmail.com", "secret", "Bob").save();
+
+        assertNotNull(User.connect("bob@gmail.com", "secret"));
+        assertNull(User.connect("bob@gmail.com", "badpassword"));
+        assertNull(User.connect("tom@gmail.com", "secret"));
     }
 
 }
