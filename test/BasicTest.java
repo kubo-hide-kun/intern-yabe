@@ -5,6 +5,11 @@ import models.*;
 
 public class BasicTest extends UnitTest {
 
+	@Before
+	public void setup() {
+		Fixtures.deleteDatabase();
+	}
+
     @Test
     public void createAndRetrivuUser() {
         new User("bob@gmail.com", "secret", "Bob").save();
