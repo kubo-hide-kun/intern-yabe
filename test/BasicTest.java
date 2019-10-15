@@ -14,4 +14,21 @@ public class BasicTest extends UnitTest {
         assertNull(User.connect("tom@gmail.com", "secret"));
     }
 
+    @Test
+    public void craetePost() {
+    	User bob = new User("bob@gmail.com", "secret", "Bob").save();
+    	new Post(bob, "My first post", "Hello world").save();
+
+    	assertEquals(1,Post.count());
+    	List<Post> bobPosts = Post.find("byAuthor", bob).fetch();
+
+    	assertEquals(1,bobPosts.size());
+    	Post firstPost = bobPosts.get(0);
+    	assertNotNull(firstPost);
+    	assertEquals(bob, firstPost.author);
+    	assertEquals("My first post", firstPost.title);
+    	assertEquals("Hello world",firstPost.content);
+    	assertNotNull(firstPost.postedAt);
+    }
+
 }
